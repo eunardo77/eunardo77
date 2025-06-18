@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Vellox - Esqueci a minha senha</title>
+    <style>
+        /* Opcional: para alinhar os links como botões de forma mais limpa */
+        .link-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+       </form>
+
+    <a href="cadastro.html" class="link-button">Cadastro</a>
+    <br>
+
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('http://127.0.0.1:8000/api/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('user_id', data.user_id);
+                alert('Login realizado!');
+                window.location.href = "produtos.html";
+            } else {
+                alert('Credenciais inválidas');
+            }
+        });
+    </script>
+</body>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Senha</title>
+</head>
+<body>
+    <h1>Esqueceu sua Senha?</h1>
+    <h3>_________________________________________________________________________________________</h3>
+    <h4>𝐈𝐧𝐬𝐢𝐫𝐚 𝐬𝐞𝐮 𝐞𝐧𝐝𝐞𝐫𝐞𝐜̧𝐨 𝐝𝐞 𝐄𝐦𝐚𝐢𝐥 𝐚𝐛𝐚𝐢𝐱𝐨 𝐪𝐮𝐞 𝐥𝐡𝐞 𝐞𝐧𝐯𝐢𝐚𝐫𝐞𝐦𝐨𝐬 𝐮𝐦 𝐥𝐢𝐧𝐤 𝐩𝐚𝐫𝐚 𝐚𝐥𝐭𝐞𝐫𝐚𝐫 𝐚 𝐬𝐮𝐚 𝐬𝐞𝐧𝐡𝐚.</h4>
+    <h4>𝗡𝗮̃𝗼 𝗳𝗮𝗰̧𝗮 𝗶𝘀𝘀𝗼 𝘀𝗲 𝗮𝗹𝗴𝘂𝗲́𝗺 𝗽𝗲𝗱𝗶𝗿 𝗽𝗮𝗿𝗮 𝘃𝗼𝗰𝗲̂ 𝗳𝗮𝘇𝗲𝗿 𝗶𝘀𝘀𝗼!</h4>
+    <form id="recoverForm">
+        <input type="email" id="email" placeholder="Digite seu e-mail" required>
+        <button type="submit">Enviar link de recuperação</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        document.getElementById('recoverForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+
+            const response = await fetch('http://127.0.0.1:8000/api/esqueci-senha', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+
+            const msg = document.getElementById('message');
+            if (response.ok) {
+                msg.textContent = 'Um link de recuperação foi enviado para seu e-mail.';
+                msg.style.color = 'green';
+            } else {
+                msg.textContent = 'E-mail não encontrado.';
+                msg.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
+</html>
