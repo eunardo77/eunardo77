@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <style>
+@font-face {
+    font-family: 'MinhaFontePersonalizada';
+    src: url('fontes/Nexa-ExtraLight.ttf') format('truetype');
+}
+</style>
     <meta charset="UTF-8">
-    <title>Flexzone - Cadastro</title>
+    <title>Flexzone - Home</title>
     <link rel="icon" href="imagens/logo.png" type="image/png">
     <style>
         @font-face {
@@ -32,16 +38,13 @@
         }
 
         #banner img {
-            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1;
         }
 
         .conteudo-banner {
             position: absolute;
-            z-index: 2;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -76,12 +79,6 @@
             padding: 10px;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .form-login input {
-            background-color: #fff;
-            color: #000;
         }
 
         .form-login button {
@@ -89,10 +86,6 @@
             color: black;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        .form-login button:hover {
-            opacity: 0.9;
         }
     </style>
 </head>
@@ -103,43 +96,40 @@
             <div id="texto-sobre-imagem">SEU DRIP<br>COMEÇA AQUI!</div>
 
             <div class="form-login">
-                <form id="cadastroForm">
-                    <h3>Crie uma conta</h3>
+                <form id="loginForm">
+                    <h3>Login</h3>
                     <input type="text" id="username" placeholder="Usuário" required>
-                    <input type="email" id="email" placeholder="Email" required>
                     <input type="password" id="password" placeholder="Senha" required>
-                    <input type="password" id="confirmPassword" placeholder="Confirmar Senha" required>
-                    
-                    <button type="submit">Cadastrar</button>
-                    <button type="button" onclick="window.location.href='home.html'">Voltar</button>
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
                 </form>
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('cadastroForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
 
-            const response = await fetch('http://127.0.0.1:8000/api/users/', {
+            const response = await fetch('http://127.0.0.1:8000/api/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, email, password, confirm_password: confirmPassword })
+                body: JSON.stringify({ username, password })
             });
 
             if (response.ok) {
-                alert('Cadastro realizado com sucesso!');
-                window.location.href = 'home.html';
-            } else {
                 const data = await response.json();
-                alert(data.error || JSON.stringify(data) || 'Erro ao cadastrar. Verifique os dados.');
+                localStorage.setItem('user_id', data.user_id);
+                alert('Login realizado!');
+                window.location.href = "produtos.html";
+            } else {
+                alert('Credenciais inválidas');
             }
+            
         });
     </script>
 </body>
