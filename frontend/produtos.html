@@ -1,78 +1,233 @@
-<!-- frontend/produtos.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Meus Produtos</title>
+  <meta charset="UTF-8">
+  <title>Produtos Flexzone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Topo com título + barra de pesquisa */
+    .topo-produtos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 60px 20px 60px;
+      flex-wrap: wrap;
+    }
+
+    .topo-produtos h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .topo-produtos input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Filtro de marcas separado */
+    .filtro-marcas {
+      margin: 0 60px 30px 60px;
+      color: white;
+    }
+
+    .filtro-marcas select {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Container dos produtos */
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 60px 60px 60px;
+    }
+
+    /* Card do produto */
+    .produto-card {
+      background-color: #111;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 280px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .produto-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .produto-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-bottom: 2px solid #222;
+    }
+
+    .produto-info {
+      padding: 15px;
+      text-align: center;
+      color: white;
+    }
+
+    .produto-info h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .preco {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .parcela {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 12px;
+    }
+
+    .btn-comprar {
+      background-color: white;
+      color: black;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-comprar:hover {
+      background-color: gold;
+      color: black;
+    }
+  </style>
 </head>
 <body>
-    <h2>Gerenciar Produtos</h2>
 
-    <form id="produtoForm">
-        <input type="text" id="nome" placeholder="Nome do produto" required>
-        <input type="number" id="preco" placeholder="Preço" required>
-        <input type="number" id="estoque" placeholder="Quantidade em estoque" required>
-        <button type="submit">Cadastrar</button>
-    </form>
+  <!-- Título e barra de pesquisa -->
+  <div class="topo-produtos">
+    <h1>Produtos Flexzone</h1>
+    <input type="text" id="pesquisa" placeholder="Pesquisar produto...">
+  </div>
 
-    <h3>Meus Produtos</h3>
-    <ul id="listaProdutos"></ul>
+  <!-- Filtro de marcas -->
+  <div class="filtro-marcas">
+    <label for="marcaFiltro">Filtrar por marca:</label>
+    <select id="marcaFiltro">
+      <option value="">Todas as marcas</option>
+      <option value="nike">Nike</option>
+      <option value="adidas">Adidas</option>
+    </select>
+  </div>
 
-    <script>
-        const userId = localStorage.getItem('user_id');
+  <!-- Produtos -->
+  <div class="cards-container">
+    <!-- Produto 1 -->
+    <div class="produto-card" data-marca="nike">
+      <img src="imagens/bobojaco nike refletivo.jpeg" alt="BOBOJACO NIKE | REFLETIVO">
+      <div class="produto-info">
+        <h3>BOBOJACO NIKE | REFLETIVO</h3>
+        <div class="preco">R$280,00</div>
+        <div class="parcela">3x de R$93,33 sem juros</div>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
 
-        if (!userId) {
-            alert('Você precisa estar logado');
-            window.location.href = 'login.html';
-        }
+    <!-- Produto 2 -->
+    <div class="produto-card" data-marca="nike">
+      <img src="imagens/conjunto nike.webp" alt="CONJUNTO NIKE">
+      <div class="produto-info">
+        <h3>CONJUNTO NIKE MASCULINO</h3>
+        <div class="preco">R$649,99</div>
+        <div class="parcela">5x de R$130,00 sem juros</div>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
 
-        async function listarProdutos() {
-            const res = await fetch('http://127.0.0.1:8000/api/produtos/');
-            const produtos = await res.json();
-            const lista = document.getElementById('listaProdutos');
-            lista.innerHTML = '';
+    <!-- Produto 3 -->
+    <div class="produto-card" data-marca="nike">
+      <img src="imagens/Tênis Nike Air VaporMax Plus Maculino.avif" alt="TÊNIS NIKE AIR VAPORMAX PLUS | MASCULINO">
+      <div class="produto-info">
+        <h3>TÊNIS NIKE AIR VAPORMAX PLUS | MASCULINO</h3>
+        <div class="preco">R$389,00</div>
+        <div class="parcela">12x de R$38,38 sem juros</div>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
 
-            produtos.forEach(produto => {
-                const li = document.createElement('li');
-                li.textContent = `${produto.nome} - R$ ${produto.preco} - ${produto.estoque} un`;
+    <!-- Produto 4 -->
+    <div class="produto-card" data-marca="adidas">
+      <img src="imagens/Tenis Adidas RunFalcon 5.avif" alt="TÊNIS ADIDAS RUNFALCON 5 | MASCULINO">
+      <div class="produto-info">
+        <h3>TÊNIS ADIDAS RUNFALCON 5 | MASCULINO</h3>
+        <div class="preco">R$280,00</div>
+        <div class="parcela">3x de R$93,33 sem juros</div>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
 
-                const btnDel = document.createElement('button');
-                btnDel.textContent = 'Excluir';
-                btnDel.onclick = () => deletarProduto(produto.id);
+    <!-- Produto 5 -->
+    <div class="produto-card" data-marca="adidas">
+      <img src="imagens/predator adidas.jpeg" alt="CHUTEIRA ADIDAS PREDATOR | MASCULINO">
+      <div class="produto-info">
+        <h3>CHUTEIRA ADIDAS PREDATOR | MASCULINO</h3>
+        <div class="preco">R$280,00</div>
+        <div class="parcela">3x de R$93,33 sem juros</div>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
 
-                li.appendChild(btnDel);
-                lista.appendChild(li);
-            });
-        }
+    <!-- Produto 6 -->
+    <div class="produto-card" data-marca="adidas">
+      <img src="imagens/Jaqueta_Adicolor_Classics_Firebird_Preto_IJ7058_01_laydown.avif" alt="CASACO ADIDAS | MASCULINO">
+      <div class="produto-info">
+        <h3>CASACO ADIDAS | MASCULINO</h3>
+        <div class="preco">R$280,00</div>
+        <div class="parcela">3x de R$93,33 sem juros</div>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
+  </div>
 
-        async function cadastrarProduto(e) {
-            e.preventDefault();
+  <!-- Script para filtro -->
+  <script>
+    const input = document.getElementById("pesquisa");
+    const select = document.getElementById("marcaFiltro");
+    const produtos = document.querySelectorAll(".produto-card");
 
-            const nome = document.getElementById('nome').value;
-            const preco = document.getElementById('preco').value;
-            const estoque = document.getElementById('estoque').value;
+    function filtrarProdutos() {
+      const termo = input.value.toLowerCase();
+      const marca = select.value;
 
-            await fetch('http://127.0.0.1:8000/api/produtos/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nome, preco, estoque })
-            });
+      produtos.forEach(produto => {
+        const nome = produto.querySelector("h3").textContent.toLowerCase();
+        const produtoMarca = produto.dataset.marca;
 
-            document.getElementById('produtoForm').reset();
-            listarProdutos();
-        }
+        const correspondeMarca = !marca || produtoMarca === marca;
+        const correspondeNome = nome.includes(termo);
 
-        async function deletarProduto(id) {
-            await fetch(`http://127.0.0.1:8000/api/produtos/${id}/`, {
-                method: 'DELETE'
-            });
-            listarProdutos();
-        }
+        produto.style.display = (correspondeMarca && correspondeNome) ? "block" : "none";
+      });
+    }
 
-        document.getElementById('produtoForm').addEventListener('submit', cadastrarProduto);
-        listarProdutos();
-    </script>
+    input.addEventListener("input", filtrarProdutos);
+    select.addEventListener("change", filtrarProdutos);
+  </script>
+
 </body>
 </html>
