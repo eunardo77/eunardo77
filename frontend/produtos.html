@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Produtos Flexzone</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="icon" href="imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -11,7 +13,6 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* Topo com título + barra de pesquisa */
     .topo-produtos {
       display: flex;
       justify-content: space-between;
@@ -34,7 +35,6 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* Filtro de marcas separado */
     .filtro-marcas {
       margin: 0 60px 30px 60px;
       color: white;
@@ -48,7 +48,6 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* Container dos produtos */
     .cards-container {
       display: flex;
       flex-wrap: wrap;
@@ -57,7 +56,6 @@
       padding: 0 60px 60px 60px;
     }
 
-    /* Card do produto */
     .produto-card {
       background-color: #111;
       border-radius: 16px;
@@ -100,7 +98,14 @@
       margin-bottom: 12px;
     }
 
-    .btn-comprar {
+    .botoes-produto {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-comprar, .btn-carrinho {
       background-color: white;
       color: black;
       border: none;
@@ -111,19 +116,81 @@
       transition: 0.3s ease;
     }
 
-    .btn-comprar:hover {
+    .btn-carrinho i {
+      font-size: 16px;
+    }
+
+    .btn-comprar:hover,
+    .btn-carrinho:hover {
       background-color: gold;
       color: black;
+    }
+
+    .logout-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 30px 0 30px;
+      box-sizing: border-box;
+    }
+
+    .btn-logout {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      background-color: darkred;
+    }
+
+    .carrinho-link {
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .contador-carrinho {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: gold;
+      color: black;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <div class="logout-container">
+    <button onclick="logout()" class="btn-logout">Logout</button>
+  </div>
 
   <!-- Título e barra de pesquisa -->
-  <div class="topo-produtos">
-    <h1>Produtos Flexzone</h1>
+ <div class="topo-produtos">
+  <h1>Produtos Flexzone</h1>
+
+  <div style="display: flex; gap: 20px; align-items: center;">
     <input type="text" id="pesquisa" placeholder="Pesquisar produto...">
+    
+    <!-- Carrinho com contador -->
+    <a href="carrinho.html" id="link-carrinho" class="carrinho-link">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="contador-carrinho" class="contador-carrinho">0</span>
+    </a>
   </div>
+</div>
+
+
 
   <!-- Filtro de marcas -->
   <div class="filtro-marcas">
@@ -132,21 +199,45 @@
       <option value="">Todas as marcas</option>
       <option value="nike">Nike</option>
       <option value="adidas">Adidas</option>
+      <option value="puma">Puma</option>
     </select>
   </div>
 
   <!-- Produtos -->
   <div class="cards-container">
+
+    <!-- Produto (exemplo) -->
+    <!-- Copie e repita os blocos abaixo para cada produto -->
+
     <!-- Produto 1 -->
     <div class="produto-card" data-marca="nike">
-      <img src="imagens/bobojaco nike refletivo.jpeg" alt="BOBOJACO NIKE | REFLETIVO">
+      <img src="imagens/bobojaco nike refletivo.jpeg" alt="CASACO BOBOJACO NIKE | REFLETIVO">
       <div class="produto-info">
-        <h3>BOBOJACO NIKE | REFLETIVO</h3>
+        <h3>CASACO BOBOJACO NIKE | REFLETIVO</h3>
         <div class="preco">R$280,00</div>
         <div class="parcela">3x de R$93,33 sem juros</div>
-        <button class="btn-comprar">Comprar</button>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
       </div>
     </div>
+
+       <div class="produto-card" data-marca="nike">
+      <img src="imagens/Chuteira Nike Zoom Mercurial Superfly 16 Elite.jpeg" alt="CHUTEIRA NIKE ZOOM MERCURIAL SUPERFLY 16 ELITE | CAMPO">
+      <div class="produto-info">
+        <h3>CHUTEIRA NIKE ZOOM MERCURIAL SUPERFLY 16 ELITE | CAMPO</h3>
+        <div class="preco">R$449,90</div>
+        <div class="parcela">6x de R$74,98 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repetir a estrutura para todos os outros produtos... -->
+    <!-- Vou aplicar o mesmo para os próximos produtos -->
 
     <!-- Produto 2 -->
     <div class="produto-card" data-marca="nike">
@@ -155,7 +246,10 @@
         <h3>CONJUNTO NIKE MASCULINO</h3>
         <div class="preco">R$649,99</div>
         <div class="parcela">5x de R$130,00 sem juros</div>
-        <button class="btn-comprar">Comprar</button>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
       </div>
     </div>
 
@@ -166,7 +260,10 @@
         <h3>TÊNIS NIKE AIR VAPORMAX PLUS | MASCULINO</h3>
         <div class="preco">R$389,00</div>
         <div class="parcela">12x de R$38,38 sem juros</div>
-        <button class="btn-comprar">Comprar</button>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
       </div>
     </div>
 
@@ -175,9 +272,12 @@
       <img src="imagens/Tenis Adidas RunFalcon 5.avif" alt="TÊNIS ADIDAS RUNFALCON 5 | MASCULINO">
       <div class="produto-info">
         <h3>TÊNIS ADIDAS RUNFALCON 5 | MASCULINO</h3>
-        <div class="preco">R$280,00</div>
-        <div class="parcela">3x de R$93,33 sem juros</div>
-        <button class="btn-comprar">Comprar</button>
+        <div class="preco">R$399,00</div>
+        <div class="parcela">4x de R$100,00 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
       </div>
     </div>
 
@@ -186,9 +286,12 @@
       <img src="imagens/predator adidas.jpeg" alt="CHUTEIRA ADIDAS PREDATOR | MASCULINO">
       <div class="produto-info">
         <h3>CHUTEIRA ADIDAS PREDATOR | MASCULINO</h3>
-        <div class="preco">R$280,00</div>
-        <div class="parcela">3x de R$93,33 sem juros</div>
-        <button class="btn-comprar">Comprar</button>
+        <div class="preco">R$329,99</div>
+        <div class="parcela">10x de R$32,99 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
       </div>
     </div>
 
@@ -197,14 +300,61 @@
       <img src="imagens/Jaqueta_Adicolor_Classics_Firebird_Preto_IJ7058_01_laydown.avif" alt="CASACO ADIDAS | MASCULINO">
       <div class="produto-info">
         <h3>CASACO ADIDAS | MASCULINO</h3>
-        <div class="preco">R$280,00</div>
-        <div class="parcela">3x de R$93,33 sem juros</div>
-        <button class="btn-comprar">Comprar</button>
+        <div class="preco">R$379,00</div>
+        <div class="parcela">6x de R$63,17 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
       </div>
     </div>
+
+    <!-- Produto 7 -->
+    <div class="produto-card" data-marca="puma">
+      <img src="imagens/Chuteira Puma Futere.jpeg" alt="CUTEIRA PUMA FUTERE | MASCULINA">
+      <div class="produto-info">
+        <h3>CHUTEIRA PUMA FUTERE | CAMPO</h3>
+        <div class="preco">R$549,90</div>
+        <div class="parcela">10x de R$54,90 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produto 8 -->
+    <div class="produto-card" data-marca="puma">
+      <img src="imagens/CAMISETA PUMA MASCULINA.webp" alt="CAMISETA PUMA | MASCULINA">
+      <div class="produto-info">
+        <h3>CAMISETA PUMA | MASCULINA</h3>
+        <div class="preco">R$80,74</div>
+        <div class="parcela">5x de R$16,14 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produto 9 -->
+    <div class="produto-card" data-marca="puma">
+      <img src="imagens/Meia Puma Tor.webp" alt="MEIA PUMA">
+      <div class="produto-info">
+        <h3>MEIA PUMA | MASCULINA</h3>
+        <div class="preco">R$42,97</div>
+        <div class="parcela">4x de R$10,74 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+    
+
   </div>
 
-  <!-- Script para filtro -->
+  <!-- Script de filtro -->
   <script>
     const input = document.getElementById("pesquisa");
     const select = document.getElementById("marcaFiltro");
@@ -227,7 +377,46 @@
 
     input.addEventListener("input", filtrarProdutos);
     select.addEventListener("change", filtrarProdutos);
+
+    // Alerta simples ao clicar no carrinho
+    // Atualiza o número de produtos no carrinho
+function atualizarContadorCarrinho() {
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+  const contador = document.getElementById('contador-carrinho');
+  if (contador) {
+    contador.textContent = carrinho.length;
+  }
+}
+atualizarContadorCarrinho();
+
+// Adiciona produto ao carrinho
+document.querySelectorAll('.btn-carrinho').forEach(botao => {
+  botao.addEventListener('click', (e) => {
+    const produtoCard = e.target.closest('.produto-card');
+    const nome = produtoCard.querySelector('h3').textContent;
+    const preco = produtoCard.querySelector('.preco').textContent;
+    const imagem = produtoCard.querySelector('img').src;
+
+    const produto = { nome, preco, imagem };
+
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.push(produto);
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+    atualizarContadorCarrinho();
+    alert('Produto adicionado ao carrinho!');
+  });
+});
+
   </script>
+  <script>
+  function logout() {
+    localStorage.removeItem('usuario'); // se você usa essa chave para login
+    alert('Logout realizado!');
+    window.location.href = 'home.html'; // redireciona para a página de login
+  }
+</script>
+
 
 </body>
 </html>

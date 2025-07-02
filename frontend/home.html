@@ -1,136 +1,178 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <style>
-@font-face {
-    font-family: 'MinhaFontePersonalizada';
-    src: url('fontes/Nexa-ExtraLight.ttf') format('truetype');
-}
-</style>
-    <meta charset="UTF-8">
-    <title>Flexzone - Home</title>
-    <link rel="icon" href="imagens/logo.png" type="image/png">
-    <style>
-        @font-face {
-            font-family: 'MinhaFontePersonalizada';
-            src: url('fontes/varsity_regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
+  <meta charset="UTF-8">
+  <title>Flexzone - Home</title>
+  <link rel="icon" href="imagens/logoflex.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'MinhaFontePersonalizada';
+      src: url('fontes/varsity_regular.ttf') format('truetype');
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body, html {
-            height: 100%;
-            font-family: 'MinhaFontePersonalizada', sans-serif;
-            background-color: #111;
-        }
+    body, html {
+      height: 100%;
+      font-family: 'MinhaFontePersonalizada', 'Poppins', sans-serif;
+      background-color: #111;
+    }
 
-        #banner {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
+    #banner {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-        #banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    #banner img {
+      width: 100%;
+      height: 100%;
+    }
 
-        .conteudo-banner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 10px;
-        }
+    .conteudo-banner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+    }
 
-        #texto-sobre-imagem {
-            color: white;
-            font-size: 60px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-            text-align: left;
-            max-width: 400px;
-        }
+    #texto-sobre-imagem {
+      color: white;
+      font-size: 60px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      max-width: 400px;
+      text-align: left;
+    }
 
-        .form-login {
-            color: white;
-        }
+    .modal-login {
+      background-color: black;
+      color: white;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        .form-login form {
-            display: flex;
-            flex-direction: column;
-        }
+    .modal-login h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
 
-        .form-login input,
-        .form-login button {
-            margin: 10px 0;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
+    .modal-login p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
 
-        .form-login button {
-            background-color: gold;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    .modal-login input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .modal-login button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-login small {
+      display: block;
+      margin-top: 15px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .logo-flexzone {
+        width: 30%;
+        height: auto;
+        max-width: 150px;
+        display: block;
+        margin: 0 auto 20px auto;
+    }
+
+    @media (max-width: 768px) {
+      #texto-sobre-imagem {
+        font-size: 40px;
+        text-align: center;
+      }
+
+      .conteudo-banner {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="banner">
-        <img src="imagens/DripUS_HOME.png" alt="Drip US">
-        <div class="conteudo-banner">
-            <div id="texto-sobre-imagem">SEU DRIP<br>COMEÇA AQUI!</div>
-
-            <div class="form-login">
-                <form id="loginForm">
-                    <h3>Login</h3>
-                    <input type="text" id="username" placeholder="Usuário" required>
-                    <input type="password" id="password" placeholder="Senha" required>
-                    <button type="submit">Entrar</button>
-                    <button type="button" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
-                </form>
-            </div>
-        </div>
+  <div id="banner">
+    <img src="imagens/Gemini_Generated_Image_k7hckok7hckok7hc.png" alt="Drip US">
+    <div class="conteudo-banner">
+      <div class="modal-login">
+        <img src="imagens/logoflex.png" alt="Logo Flexzone" class="logo-flexzone">
+        <h2>Ofertas e novidades</h2>
+        <p>Inscreva-se e receba 10% de DESCONTO na sua próxima compra!</p>
+        <form id="loginForm">
+          <input type="text" id="username" placeholder="Usuário" required>
+          <input type="password" id="password" placeholder="Senha" required>
+          <input type="email" id="email" placeholder="Email" required>
+          <button type="submit">Entrar</button>
+          <button type="button" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
+        </form>
+        <small>Você receberá um email para confirmar sua inscrição</small>
+      </div>
     </div>
+  </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
 
-            const response = await fetch('http://127.0.0.1:8000/api/login/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
+      const response = await fetch('http://127.0.0.1:8000/api/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
 
-            if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem('user_id', data.user_id);
-                alert('Login realizado!');
-                window.location.href = "produtos.html";
-            } else {
-                alert('Credenciais inválidas');
-            }
-            
-        });
-    </script>
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('user_id', data.user_id);
+        alert('Login realizado!');
+        window.location.href = "produtos.html";
+      } else {
+        alert('Credenciais inválidas');
+      }
+    });
+  </script>
 </body>
 </html>

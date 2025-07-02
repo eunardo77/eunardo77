@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Coleção Flexzone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="icon" href="imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png" type="image/png">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+    }
+
+    .cabecalho {
+      padding: 40px 60px 20px 60px;
+      text-align: center;
+    }
+
+    .cabecalho h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .cabecalho p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .btn-voltar {
+      margin-top: 10px;
+      background-color: transparent;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 20px;
+      border: 2px solid white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-voltar:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .colecao-galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 40px 60px 60px 60px;
+    }
+
+    .item-colecao {
+      background-color: #111;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .item-colecao:hover {
+      transform: translateY(-5px);
+    }
+
+    .item-colecao img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-bottom: 2px solid #222;
+    }
+
+    .item-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .item-info h3 {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+
+    .btn-detalhes {
+      margin-top: 10px;
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-detalhes:hover {
+      background-color: gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="cabecalho">
+    <h1>Coleção Flexzone 2025</h1>
+    <p>Estilo urbano, performance atlética e identidade de rua. Confira nossa seleção exclusiva.</p>
+
+    <!-- Botão de voltar para a tela de login -->
+    <a href="home.html">
+      <button class="btn-voltar">Voltar para o Login</button>
+    </a>
+  </div>
+
+  <div class="colecao-galeria">
+    <div class="item-colecao">
+      <img src="imagens/conjunto nike.webp" alt="Conjunto Nike">
+      <div class="item-info">
+        <h3>Conjunto Nike Masculino</h3>
+        <a href="coleção1.html">
+          <button class="btn-detalhes">Ver Detalhes</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="item-colecao">
+      <img src="imagens/CAMISETA PUMA MASCULINA.webp" alt="Camiseta Puma">
+      <div class="item-info">
+        <h3>Camiseta Puma Masculina</h3>
+        <a href="coleção3.html">
+          <button class="btn-detalhes">Ver Detalhes</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="item-colecao">
+      <img src="imagens/Jaqueta_Adicolor_Classics_Firebird_Preto_IJ7058_01_laydown.avif" alt="Jaqueta Adidas">
+      <div class="item-info">
+        <h3>Jaqueta Adidas Firebird</h3>
+        <a href="coleção4.html">
+          <button class="btn-detalhes">Ver Detalhes</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="item-colecao">
+      <img src="imagens/bobojaco nike refletivo.jpeg" alt="Bobojaco Nike">
+      <div class="item-info">
+        <h3>Casaco Bobojaco Nike Refletivo</h3>
+        <a href="coleção2.html">
+          <button class="btn-detalhes">Ver Detalhes</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
