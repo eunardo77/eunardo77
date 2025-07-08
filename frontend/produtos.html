@@ -350,7 +350,71 @@
         </div>
       </div>
     </div>
+
+           <div class="produto-card" data-marca="nike">
+      <img src="imagens/barcelonauni.png" alt="KIT BARCELONA | MASCULINO">
+      <div class="produto-info">
+        <h3>KIT BARCELONA | MASCULINO</h3>
+        <div class="preco">R$149,90</div>
+        <div class="parcela">6x de R$24,98 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+
+      <div class="produto-card" data-marca="puma">
+      <img src="imagens/cityuni.jpg" alt="KIT MAN CITY | MASCULINO">
+      <div class="produto-info">
+        <h3>KIT MAN CITY | MASCULINA</h3>
+        <div class="preco">R$149,90</div>
+        <div class="parcela">6x de R$24,98 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
     
+        <div class="produto-card" data-marca="adidas">
+      <img src="imagens/realmadriduni.jpg" alt="KIT REAL MADRID | MASCULINO">
+      <div class="produto-info">
+        <h3>KIT REAL MADRID | MASCULINO</h3>
+        <div class="preco">R$149,90</div>
+        <div class="parcela">6x de R$24,98 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+
+            <div class="produto-card" data-marca="adidas">
+      <img src="imagens/conadidas.jpg" alt="CONJUNTO ADIDAS | MASCULINO">
+      <div class="produto-info">
+        <h3>CONJUNTO ADIDAS | MASCULINO</h3>
+        <div class="preco">R$259,90</div>
+        <div class="parcela">6x de R$43,16 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
+
+          <div class="produto-card" data-marca="puma">
+      <img src="imagens/conpuma.jpg" alt="CONJUNTO PUMA | MASCULINO">
+      <div class="produto-info">
+        <h3>CONJUNTO PUMA | MASCULINO</h3>
+        <div class="preco">R$259,90</div>
+        <div class="parcela">6x de R$43,16 sem juros</div>
+        <div class="botoes-produto">
+          <button class="btn-comprar">Comprar</button>
+          <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -408,6 +472,25 @@ document.querySelectorAll('.btn-carrinho').forEach(botao => {
   });
 });
 
+// Redireciona o usuário com o produto selecionado para o "checkout.html"
+document.querySelectorAll('.btn-comprar').forEach(botao => {
+  botao.addEventListener('click', (e) => {
+    const produtoCard = e.target.closest('.produto-card');
+    const nome = produtoCard.querySelector('h3').textContent;
+    const preco = produtoCard.querySelector('.preco').textContent;
+    const imagem = produtoCard.querySelector('img').src;
+    const tipo = nome.toLowerCase().includes('chuteira') || nome.toLowerCase().includes('tênis') ? 'calçado' : 'roupa';
+
+
+    const produtoSelecionado = { nome, preco, imagem };
+    localStorage.setItem('produtoSelecionado', JSON.stringify(produtoSelecionado));
+
+    window.location.href = 'checkout.html';
+  });
+});
+</script>
+
+
   </script>
   <script>
   function logout() {
@@ -415,6 +498,8 @@ document.querySelectorAll('.btn-carrinho').forEach(botao => {
     alert('Logout realizado!');
     window.location.href = 'home.html'; // redireciona para a página de login
   }
+
+  
 </script>
 
 
