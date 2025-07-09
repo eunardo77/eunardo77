@@ -7,6 +7,44 @@ from django.contrib.auth import authenticate
 from .models import Produto
 from .serializers import ProdutoSerializer, UserSerializer
 
+# Páginas HTML
+def pagina_inicial(request):
+    return render(request, 'Inicial.html')
+
+def pagina_home(request):
+    return render(request, 'home.html')
+
+def pagina_login(request):
+    return render(request, 'login.html')
+
+def pagina_cadastro(request):
+    return render(request, 'cadastro.html')
+
+def pagina_produtos(request):
+    return render(request, 'produtos.html')
+
+def pagina_carrinho(request):
+    return render(request, 'carrinho.html')
+
+def pagina_checkout(request):
+    return render(request, 'checkout.html')
+
+def pagina_colecao1(request):
+    return render(request, 'coleção1.html')
+
+def pagina_colecao2(request):
+    return render(request, 'coleção2.html')
+
+def pagina_colecao3(request):
+    return render(request, 'coleção3.html')
+
+def pagina_colecao4(request):
+    return render(request, 'coleção4.html')
+
+def pagina_colecoes(request):
+    return render(request, 'coleções.html')
+
+# API
 class ProdutoViewSet(viewsets.ModelViewSet):
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer

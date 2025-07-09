@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Coleção Flexzone</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="icon" href="imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png" type="image/png">
+  <link rel="icon" href="{% static 'imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png' %}" type="image/png">
   <style>
     body {
       margin: 0;
@@ -104,53 +105,51 @@
     <h1>Coleção Flexzone 2025</h1>
     <p>Estilo urbano, performance atlética e identidade de rua. Confira nossa seleção exclusiva.</p>
 
-    <!-- Botão de voltar para a tela de login -->
-    <a href="home.html">
+    <a href="{% url 'home' %}">
       <button class="btn-voltar">Voltar para o Login</button>
     </a>
   </div>
 
   <div class="colecao-galeria">
     <div class="item-colecao">
-      <img src="imagens/conjunto nike.webp" alt="Conjunto Nike">
+      <img src="{% static 'imagens/conjunto nike.webp' %}" alt="Conjunto Nike">
       <div class="item-info">
         <h3>Conjunto Nike Masculino</h3>
-        <a href="coleção1.html">
+        <a href="{% url 'colecao1' %}">
           <button class="btn-detalhes">Ver Detalhes</button>
         </a>
       </div>
     </div>
 
     <div class="item-colecao">
-      <img src="imagens/CAMISETA PUMA MASCULINA.webp" alt="Camiseta Puma">
+      <img src="{% static 'imagens/CAMISETA PUMA MASCULINA.webp' %}" alt="Camiseta Puma">
       <div class="item-info">
         <h3>Camiseta Puma Masculina</h3>
-        <a href="coleção3.html">
+        <a href="{% url 'colecao3' %}">
           <button class="btn-detalhes">Ver Detalhes</button>
         </a>
       </div>
     </div>
 
     <div class="item-colecao">
-      <img src="imagens/Jaqueta_Adicolor_Classics_Firebird_Preto_IJ7058_01_laydown.avif" alt="Jaqueta Adidas">
+      <img src="{% static 'imagens/Jaqueta_Adicolor_Classics_Firebird_Preto_IJ7058_01_laydown.avif' %}" alt="Jaqueta Adidas">
       <div class="item-info">
         <h3>Jaqueta Adidas Firebird</h3>
-        <a href="coleção4.html">
+        <a href="{% url 'colecao4' %}">
           <button class="btn-detalhes">Ver Detalhes</button>
         </a>
       </div>
     </div>
 
     <div class="item-colecao">
-      <img src="imagens/bobojaco nike refletivo.jpeg" alt="Bobojaco Nike">
+      <img src="{% static 'imagens/bobojaco nike refletivo.jpeg' %}" alt="Bobojaco Nike">
       <div class="item-info">
         <h3>Casaco Bobojaco Nike Refletivo</h3>
-        <a href="coleção2.html">
+        <a href="{% url 'colecao2' %}">
           <button class="btn-detalhes">Ver Detalhes</button>
         </a>
       </div>
     </div>
   </div>
-
 </body>
 </html>

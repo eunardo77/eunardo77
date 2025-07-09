@@ -1,0 +1,460 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Produtos Flexzone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="icon" href="{% static 'imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png' %}" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .topo-produtos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 60px 20px 60px;
+      flex-wrap: wrap;
+    }
+
+    .topo-produtos h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .topo-produtos input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .filtro-marcas {
+      margin: 0 60px 30px 60px;
+      color: white;
+    }
+
+    .filtro-marcas select {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 60px 60px 60px;
+    }
+
+    .produto-card {
+      background-color: #111;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 280px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .produto-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .produto-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-bottom: 2px solid #222;
+    }
+
+    .produto-info {
+      padding: 15px;
+      text-align: center;
+      color: white;
+    }
+
+    .produto-info h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .preco {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .parcela {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 12px;
+    }
+
+    .botoes-produto {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-comprar, .btn-carrinho {
+      background-color: white;
+      color: black;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-carrinho i {
+      font-size: 16px;
+    }
+
+    .btn-comprar:hover,
+    .btn-carrinho:hover {
+      background-color: gold;
+      color: black;
+    }
+
+    .logout-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 30px 0 30px;
+      box-sizing: border-box;
+    }
+
+    .btn-logout {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      background-color: darkred;
+    }
+
+    .carrinho-link {
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .contador-carrinho {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background-color: gold;
+      color: black;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-container">
+    <button onclick="logout()" class="btn-logout">Logout</button>
+  </div>
+
+  <!-- Título e barra de pesquisa -->
+  <div class="topo-produtos">
+    <h1>Produtos Flexzone</h1>
+
+    <div style="display: flex; gap: 20px; align-items: center;">
+      <input type="text" id="pesquisa" placeholder="Pesquisar produto...">
+      <a href="{% url 'carrinho' %}" id="link-carrinho" class="carrinho-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="contador-carrinho" class="contador-carrinho">0</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Filtro de marcas -->
+  <div class="filtro-marcas">
+    <label for="marcaFiltro">Filtrar por marca:</label>
+    <select id="marcaFiltro">
+      <option value="">Todas as marcas</option>
+      <option value="nike">Nike</option>
+      <option value="adidas">Adidas</option>
+      <option value="puma">Puma</option>
+    </select>
+  </div>
+
+  <!-- Produtos -->
+  <div class="cards-container">
+  <div class="produto-card" data-marca="nike">
+    <img src="{% static 'imagens/bobojaco nike refletivo.jpeg' %}" alt="CASACO BOBOJACO NIKE | REFLETIVO">
+    <div class="produto-info">
+      <h3>CASACO BOBOJACO NIKE | REFLETIVO</h3>
+      <div class="preco">R$280,00</div>
+      <div class="parcela">3x de R$93,33 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="nike">
+    <img src="{% static 'imagens/Chuteira Nike Zoom Mercurial Superfly 16 Elite.jpeg' %}" alt="CHUTEIRA NIKE ZOOM MERCURIAL SUPERFLY 16 ELITE | CAMPO">
+    <div class="produto-info">
+      <h3>CHUTEIRA NIKE ZOOM MERCURIAL SUPERFLY 16 ELITE | CAMPO</h3>
+      <div class="preco">R$449,90</div>
+      <div class="parcela">6x de R$74,98 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="nike">
+    <img src="{% static 'imagens/conjunto nike.webp' %}" alt="CONJUNTO NIKE MASCULINO">
+    <div class="produto-info">
+      <h3>CONJUNTO NIKE MASCULINO</h3>
+      <div class="preco">R$649,99</div>
+      <div class="parcela">5x de R$130,00 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="nike">
+    <img src="{% static 'imagens/Tênis Nike Air VaporMax Plus Maculino.avif' %}" alt="TÊNIS NIKE AIR VAPORMAX PLUS | MASCULINO">
+    <div class="produto-info">
+      <h3>TÊNIS NIKE AIR VAPORMAX PLUS | MASCULINO</h3>
+      <div class="preco">R$389,00</div>
+      <div class="parcela">12x de R$38,38 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="adidas">
+    <img src="{% static 'imagens/Tenis Adidas RunFalcon 5.avif' %}" alt="TÊNIS ADIDAS RUNFALCON 5 | MASCULINO">
+    <div class="produto-info">
+      <h3>TÊNIS ADIDAS RUNFALCON 5 | MASCULINO</h3>
+      <div class="preco">R$399,00</div>
+      <div class="parcela">4x de R$100,00 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="adidas">
+    <img src="{% static 'imagens/predator adidas.jpeg' %}" alt="CHUTEIRA ADIDAS PREDATOR | MASCULINO">
+    <div class="produto-info">
+      <h3>CHUTEIRA ADIDAS PREDATOR | MASCULINO</h3>
+      <div class="preco">R$329,99</div>
+      <div class="parcela">10x de R$32,99 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="adidas">
+    <img src="{% static 'imagens/Jaqueta_Adicolor_Classics_Firebird_Preto_IJ7058_01_laydown.avif' %}" alt="CASACO ADIDAS | MASCULINO">
+    <div class="produto-info">
+      <h3>CASACO ADIDAS | MASCULINO</h3>
+      <div class="preco">R$379,00</div>
+      <div class="parcela">6x de R$63,17 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="puma">
+    <img src="{% static 'imagens/Chuteira Puma Futere.jpeg' %}" alt="CHUTEIRA PUMA FUTERE | CAMPO">
+    <div class="produto-info">
+      <h3>CHUTEIRA PUMA FUTERE | CAMPO</h3>
+      <div class="preco">R$549,90</div>
+      <div class="parcela">10x de R$54,90 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="puma">
+    <img src="{% static 'imagens/CAMISETA PUMA MASCULINA.webp' %}" alt="CAMISETA PUMA | MASCULINA">
+    <div class="produto-info">
+      <h3>CAMISETA PUMA | MASCULINA</h3>
+      <div class="preco">R$80,74</div>
+      <div class="parcela">5x de R$16,14 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="nike">
+    <img src="{% static 'imagens/barcelonauni.png' %}" alt="KIT BARCELONA | MASCULINO">
+    <div class="produto-info">
+      <h3>KIT BARCELONA | MASCULINO</h3>
+      <div class="preco">R$149,90</div>
+      <div class="parcela">6x de R$24,98 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="puma">
+    <img src="{% static 'imagens/cityuni.jpg' %}" alt="KIT MAN CITY | MASCULINO">
+    <div class="produto-info">
+      <h3>KIT MAN CITY | MASCULINA</h3>
+      <div class="preco">R$149,90</div>
+      <div class="parcela">6x de R$24,98 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="adidas">
+    <img src="{% static 'imagens/realmadriduni.jpg' %}" alt="KIT REAL MADRID | MASCULINO">
+    <div class="produto-info">
+      <h3>KIT REAL MADRID | MASCULINO</h3>
+      <div class="preco">R$149,90</div>
+      <div class="parcela">6x de R$24,98 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="adidas">
+    <img src="{% static 'imagens/conadidas.jpg' %}" alt="CONJUNTO ADIDAS | MASCULINO">
+    <div class="produto-info">
+      <h3>CONJUNTO ADIDAS | MASCULINO</h3>
+      <div class="preco">R$259,90</div>
+      <div class="parcela">6x de R$43,16 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-card" data-marca="puma">
+    <img src="{% static 'imagens/conpuma.jpg' %}" alt="CONJUNTO PUMA | MASCULINO">
+    <div class="produto-info">
+      <h3>CONJUNTO PUMA | MASCULINO</h3>
+      <div class="preco">R$259,90</div>
+      <div class="parcela">6x de R$43,16 sem juros</div>
+      <div class="botoes-produto">
+        <button class="btn-comprar">Comprar</button>
+        <button class="btn-carrinho"><i class="fas fa-shopping-cart"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    // Filtro de produtos
+    const input = document.getElementById("pesquisa");
+    const select = document.getElementById("marcaFiltro");
+    const produtos = document.querySelectorAll(".produto-card");
+
+    function filtrarProdutos() {
+      const termo = input.value.toLowerCase();
+      const marca = select.value;
+
+      produtos.forEach(produto => {
+        const nome = produto.querySelector("h3").textContent.toLowerCase();
+        const produtoMarca = produto.dataset.marca;
+
+        const correspondeMarca = !marca || produtoMarca === marca;
+        const correspondeNome = nome.includes(termo);
+
+        produto.style.display = (correspondeMarca && correspondeNome) ? "block" : "none";
+      });
+    }
+
+    input.addEventListener("input", filtrarProdutos);
+    select.addEventListener("change", filtrarProdutos);
+
+    // Carrinho
+    function atualizarContadorCarrinho() {
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const contador = document.getElementById('contador-carrinho');
+      if (contador) contador.textContent = carrinho.length;
+    }
+    atualizarContadorCarrinho();
+
+    // Adiciona produto ao carrinho
+    document.querySelectorAll('.btn-carrinho').forEach(botao => {
+      botao.addEventListener('click', (e) => {
+        const produtoCard = e.target.closest('.produto-card');
+        const nome = produtoCard.querySelector('h3').textContent;
+        const preco = produtoCard.querySelector('.preco').textContent;
+        const imagem = produtoCard.querySelector('img').src;
+
+        const produto = { nome, preco, imagem };
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        carrinho.push(produto);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizarContadorCarrinho();
+        alert('Produto adicionado ao carrinho!');
+      });
+    });
+
+    // Redireciona para checkout
+    document.querySelectorAll('.btn-comprar').forEach(botao => {
+      botao.addEventListener('click', (e) => {
+        const produtoCard = e.target.closest('.produto-card');
+        const nome = produtoCard.querySelector('h3').textContent;
+        const preco = produtoCard.querySelector('.preco').textContent;
+        const imagem = produtoCard.querySelector('img').src;
+
+        const produtoSelecionado = { nome, preco, imagem };
+        localStorage.setItem('produtoSelecionado', JSON.stringify(produtoSelecionado));
+
+        window.location.href = "{% url 'checkout' %}";
+      });
+    });
+
+    // Logout
+    function logout() {
+      localStorage.removeItem('usuario');
+      alert('Logout realizado!');
+      window.location.href = "{% url 'home' %}";
+    }
+  </script>
+</body>
+</html>

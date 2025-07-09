@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Flexzone - Cadastro</title>
-    <link rel="icon" href="imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png" type="image/png">
+    <link rel="icon" href="{% static 'imagens/logoflex.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'imagens/A_graffiti-style_logo_in_street_art_style_displays (1).png' %}" type="image/png">
     <style>
         @font-face {
             font-family: 'MinhaFontePersonalizada';
-            src: url('fontes/Nexa-ExtraLight.ttf') format('truetype');
+            src: url('{% static "fontes/Nexa-ExtraLight.ttf" %}') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
@@ -98,7 +100,7 @@
 </head>
 <body>
     <div id="banner">
-        <img src="imagens/DripUS_HOME.png" alt="Drip US">
+        <img src="{% static 'imagens/DripUS_HOME.png' %}" alt="Drip US">
         <div class="conteudo-banner">
 
             <div class="form-login">
@@ -110,7 +112,7 @@
                     <input type="password" id="confirmPassword" placeholder="Confirmar Senha" required>
                     
                     <button type="submit">Cadastrar</button>
-                    <button type="button" onclick="window.location.href='home.html'">Voltar</button>
+                    <button type="button" onclick="window.location.href='{% url 'home' %}'">Voltar</button>
                 </form>
             </div>
         </div>
@@ -134,7 +136,7 @@
 
             if (response.ok) {
                 alert('Cadastro realizado com sucesso!');
-                window.location.href = 'home.html';
+                window.location.href = "{% url 'home' %}";
             } else {
                 const data = await response.json();
                 alert(data.error || JSON.stringify(data) || 'Erro ao cadastrar. Verifique os dados.');

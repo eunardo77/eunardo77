@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Carrinho de Compras | Flexzone</title>
+  <link rel="icon" href="{% static 'imagens/logoflex.png' %}" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -77,7 +79,8 @@
   </style>
 </head>
 <body>
-    <a href="carrinho.html" id="link-carrinho" style="text-decoration: none; color: white; font-size: 20px; position: fixed; top: 20px; right: 30px;">
+
+<a href="{% url 'carrinho' %}" id="link-carrinho" style="text-decoration: none; color: white; font-size: 20px; position: fixed; top: 20px; right: 30px;">
   <i class="fas fa-shopping-cart"></i>
   <span id="contador-carrinho" style="
     position: absolute;
@@ -92,57 +95,53 @@
   ">0</span>
 </a>
 
+<h1>Seu Carrinho</h1>
 
-  <h1>Seu Carrinho</h1>
+<div id="carrinho-container"></div>
 
-  <div id="carrinho-container"></div>
+<div class="total" id="total"></div>
 
-  <div class="total" id="total"></div>
+<a href="{% url 'produtos' %}" class="btn-voltar">Continuar comprando</a>
 
-  <a href="produtos.html" class="btn-voltar">Continuar comprando</a>
+<script>
+  function carregarCarrinho() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const container = document.getElementById('carrinho-container');
+    const totalEl = document.getElementById('total');
+    container.innerHTML = '';
+    let total = 0;
 
-  <script>
-    function carregarCarrinho() {
-      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-      const container = document.getElementById('carrinho-container');
-      const totalEl = document.getElementById('total');
-      container.innerHTML = '';
-      let total = 0;
+    carrinho.forEach((produto, index) => {
+      const precoNumerico = parseFloat(produto.preco.replace('R$', '').replace(',', '.'));
+      total += precoNumerico;
 
-      carrinho.forEach((produto, index) => {
-        const precoNumerico = parseFloat(produto.preco.replace('R$', '').replace(',', '.'));
-        total += precoNumerico;
-
-        const div = document.createElement('div');
-        div.classList.add('produto');
-        div.innerHTML = `
-          <img src="${produto.imagem}" alt="${produto.nome}">
-          <div class="produto-info">
-            <h3>${produto.nome}</h3>
-            <div class="preco">${produto.preco}</div>
-          </div>
-          <button class="btn-remover" data-index="${index}">Remover</button>
-        `;
-        container.appendChild(div);
-      });
-
-      totalEl.textContent = carrinho.length > 0 ? `Total: R$${total.toFixed(2).replace('.', ',')}` : 'Carrinho vazio.';
-    }
-
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('btn-remover')) {
-        const index = e.target.getAttribute('data-index');
-        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        carrinho.splice(index, 1);
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        carregarCarrinho();
-      }
+      const div = document.createElement('div');
+      div.classList.add('produto');
+      div.innerHTML = `
+        <img src="${produto.imagem}" alt="${produto.nome}">
+        <div class="produto-info">
+          <h3>${produto.nome}</h3>
+          <div class="preco">${produto.preco}</div>
+        </div>
+        <button class="btn-remover" data-index="${index}">Remover</button>
+      `;
+      container.appendChild(div);
     });
 
-    carregarCarrinho();
-    
-  </script>
-  <script>
+    totalEl.textContent = carrinho.length > 0 ? `Total: R$${total.toFixed(2).replace('.', ',')}` : 'Carrinho vazio.';
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-remover')) {
+      const index = e.target.getAttribute('data-index');
+      let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      carrinho.splice(index, 1);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+      carregarCarrinho();
+      atualizarContadorCarrinho();
+    }
+  });
+
   function atualizarContadorCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const contador = document.getElementById('contador-carrinho');
@@ -150,9 +149,10 @@
       contador.textContent = carrinho.length;
     }
   }
+
+  carregarCarrinho();
   atualizarContadorCarrinho();
 </script>
-
 
 </body>
 </html>

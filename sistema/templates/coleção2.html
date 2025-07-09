@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Detalhes do Produto - Conjunto Nike</title>
+  <title>Detalhes do Produto - Casaco Bobojaco Nike</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     body {
@@ -72,15 +73,18 @@
 <body>
   <div class="container">
     <div class="produto-detalhes">
-      <img src="imagens/conjunto nike.webp" alt="Conjunto Nike">
+      <img src="{% static 'imagens/bobojaco nike refletivo.jpeg' %}" alt="Casaco Bobojaco Nike Refletivo">
       <div class="info">
-        <h1>Conjunto Nike Masculino</h1>
-        <p> 
-          Ideal para treinos ou uso casual, o conjunto Nike combina estilo esportivo com conforto. Feito com tecidos respiráveis e acabamento premium. 
-          Disponível em diversos tamanhos e com design moderno, é a escolha perfeita para quem busca performance e estilo.
+        <h1>Casaco Bobojaco Nike Refletivo</h1>
+        <p>
+          O bobojaco é aquele casaco versátil e estiloso que combina conforto e atitude. Muito usado nos anos 90 e 2000, ele voltou com força total nas tendências atuais — ideal para quem busca um visual urbano, retrô ou streetwear. Feito com materiais acolchoados e forro quente, ele é perfeito para os dias frios, sem perder o estilo.
+
+          Com design oversized, zíper frontal, bolsos utilitários e uma pegada esportiva, o bobojaco é a peça-chave para compor looks despojados com personalidade. Seja em cores neutras ou em versões coloridas e estampadas, ele é sucesso garantido no street style.
+
+          Se você quer oferecer uma peça cheia de atitude, nostalgia e conforto na sua coleção, o bobojaco é aposta certa!
         </p>
-        <div class="preco">R$ 349,90</div>
-        <a class="btn-voltar" href="coleções.html">← Voltar à coleção</a>
+        <div class="preco">R$ 280,00</div>
+        <a class="btn-voltar" href="{% url 'colecoes' %}">← Voltar à coleção</a>
       </div>
     </div>
   </div>

@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Finalizar Compra - Flexzone</title>
+  <link rel="icon" href="{% static 'imagens/logoflex.png' %}" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     body {
@@ -152,7 +154,7 @@
 
 <div class="container-compra">
   <div class="imagem-produto">
-    <img id="imagem-produto" src="" alt="Produto">
+    <img id="imagem-produto" src="{% static '' %}" alt="Produto">
   </div>
   <div class="detalhes-produto">
     <h2 id="nome-produto"></h2>
@@ -188,16 +190,13 @@
     document.getElementById('nome-produto').textContent = produto.nome;
     document.getElementById('preco-produto').textContent = produto.preco;
 
-    // Preço original fictício (10% maior)
     const valor = parseFloat(produto.preco.replace('R$', '').replace(',', '.'));
     const valorOriginal = valor + valor * 0.1;
     document.getElementById('preco-original').textContent = 'R$' + valorOriginal.toFixed(2).replace('.', ',');
 
-    // Parcelamento
     const parcelaTexto = `3x de R$${(valor / 3).toFixed(2).replace('.', ',')} sem juros`;
     document.getElementById('parcela-produto').textContent = parcelaTexto;
 
-    // Carrega tamanhos conforme tipo
     const opcoes = document.getElementById('opcoes-tamanho');
 
     if (produto.tipo === 'calçado') {
@@ -222,7 +221,6 @@
       `;
     }
 
-    // Aplica evento aos botões de tamanho
     document.querySelectorAll('.tamanhos-botoes button').forEach(botao => {
       botao.addEventListener('click', () => {
         document.querySelectorAll('.tamanhos-botoes button').forEach(b => b.classList.remove('ativo'));
@@ -231,7 +229,6 @@
     });
   }
 
-  // Controle de quantidade
   let quantidade = 1;
   function alterarQuantidade(delta) {
     quantidade += delta;
@@ -239,7 +236,6 @@
     document.getElementById('quantidade').textContent = quantidade;
   }
 
-  // Finaliza a compra
   function finalizarCompra() {
     const tamanhoSelecionado = document.querySelector('.tamanhos-botoes button.ativo');
     if (!tamanhoSelecionado) {
@@ -251,7 +247,7 @@
     localStorage.removeItem('produtoSelecionado');
 
     setTimeout(() => {
-      window.location.href = "produtos.html"; // redirecione para sua home
+      window.location.href = "{% url 'produtos' %}";
     }, 2000);
   }
 </script>
